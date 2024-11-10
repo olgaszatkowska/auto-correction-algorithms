@@ -46,6 +46,7 @@ class MarkovModel:
 class MarkovAutoCorrect(ContextAutoCorrect):
     def __init__(self, order: int = 1):
         corpus = load_valid_sentences()
+        self.order = order
         self.markov_model = MarkovModel(n=order)
         self.markov_model.train(corpus)
 
@@ -68,4 +69,4 @@ class MarkovAutoCorrect(ContextAutoCorrect):
 
     @property
     def name(self) -> str:
-        return "Markov"
+        return f"Markov order:{self.order}"
