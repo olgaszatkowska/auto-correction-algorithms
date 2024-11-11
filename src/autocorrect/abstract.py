@@ -37,6 +37,7 @@ class SingleWordLookup(AutoCorrect):
     def load_valid_words(self) -> list[str]:
         return load_valid_words()
 
+
 class ContextAutoCorrect(AutoCorrect):
     def load_test_set(self, n: str) -> DataFrame:
         df = load_context_data_set()
@@ -49,6 +50,9 @@ class ContextAutoCorrect(AutoCorrect):
             unique_words.update(sentence.lower().split())
 
         return unique_words
+
+    def load_valid_sentences(self) -> list[str]:
+        return load_valid_sentences()
 
     def is_correct(self, word: str) -> list[str]:
         return word in self.load_valid_words()

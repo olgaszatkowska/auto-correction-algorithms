@@ -4,7 +4,6 @@ from dataclasses import dataclass
 import matplotlib.pyplot as plt
 
 from autocorrect import LevenshteinAutoCorrect, AutoCorrect, MarkovAutoCorrect
-from data import load_single_word_lookup_data_set
 
 
 @dataclass
@@ -56,7 +55,7 @@ def count_correct_fixes(cls: AutoCorrect, samples_count: int) -> int:
 
         was_correct = fixed == original
         info = "CORRECT" if was_correct else "WRONG"
-        print(f"'{fixed}' {info} {cls.name} {n+1}/{samples_count}")
+        print(f"'{fixed}' '{cls.name}' {info} {n+1}/{samples_count}")
 
         if fixed == original:
             correct += 1
@@ -66,8 +65,8 @@ def count_correct_fixes(cls: AutoCorrect, samples_count: int) -> int:
 
 def run_tests(samples_count: int) -> list[ResearchResults]:
     auto_correct_classes = [
-        LevenshteinAutoCorrect(),
-        # MarkovAutoCorrect()
+        # LevenshteinAutoCorrect(),
+        MarkovAutoCorrect()
     ]
     tests_results = []
 

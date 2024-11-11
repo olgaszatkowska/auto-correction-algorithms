@@ -2,7 +2,6 @@ import random
 from collections import defaultdict
 
 from autocorrect.abstract import ContextAutoCorrect
-from data import load_valid_sentences
 
 
 class MarkovModel:
@@ -46,7 +45,7 @@ class MarkovModel:
 
 class MarkovAutoCorrect(ContextAutoCorrect):
     def __init__(self, order: int = 1):
-        corpus = load_valid_sentences()
+        corpus = self.load_valid_sentences()
         self.order = order
         self.markov_model = MarkovModel(n=order)
         self.markov_model.train(corpus)
