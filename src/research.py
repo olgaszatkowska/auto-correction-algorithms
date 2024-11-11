@@ -51,7 +51,7 @@ def count_correct_fixes(cls: AutoCorrect, samples_count: int) -> int:
     for n, (i, row) in enumerate(sample.iterrows()):
         original = row["label"]
         misspelled = row["input"]
-        
+
         fixed = cls.fix_word(misspelled)
 
         was_correct = fixed == original
@@ -66,8 +66,8 @@ def count_correct_fixes(cls: AutoCorrect, samples_count: int) -> int:
 
 def run_tests(samples_count: int) -> list[ResearchResults]:
     auto_correct_classes = [
-        # LevenshteinAutoCorrect(),
-        MarkovAutoCorrect()
+        LevenshteinAutoCorrect(),
+        # MarkovAutoCorrect()
     ]
     tests_results = []
 

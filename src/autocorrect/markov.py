@@ -4,9 +4,10 @@ from collections import defaultdict
 from autocorrect.abstract import ContextAutoCorrect
 from data import load_valid_sentences
 
+
 class MarkovModel:
-    def __init__(self, n: int=1):
-        self.n = n 
+    def __init__(self, n: int = 1):
+        self.n = n
         self.model = defaultdict(lambda: defaultdict(int))
 
     def train(self, corpus: str) -> None:

@@ -1,12 +1,11 @@
 import numpy as np
 
 from autocorrect.abstract import SingleWordLookup
-from data import load_valid_words
 
 
 class LevenshteinAutoCorrect(SingleWordLookup):
     def fix_word(self, word: str) -> str:
-        dictionary = load_valid_words()
+        dictionary = self.load_valid_words()
 
         closest_word = None
         min_distance = float("inf")

@@ -29,7 +29,9 @@ def misspell_sentence(sentence: str, misspelled_df: pd.DataFrame) -> str | None:
     return None
 
 
-def create_misspelled_sentences(SINGLE_WORD_LOOKUP_DATA_path: str, english_sentences_path: str):
+def create_misspelled_sentences(
+    SINGLE_WORD_LOOKUP_DATA_path: str, english_sentences_path: str
+):
     with open(english_sentences_path, "r") as english_sentences_file:
         english_sentences = english_sentences_file.readlines()
 
@@ -56,12 +58,16 @@ def download_data():
     SENTENCES_DATA_FILE_PATH = os.path.join(sentences_path, "sentences.txt")
 
     with open(env_file, "w") as file:
-        file.write(f'{SINGLE_WORD_LOOKUP_DATA_PATH_KEY}="{SINGLE_WORD_LOOKUP_DATA_FILE_PATH}"\n')
+        file.write(
+            f'{SINGLE_WORD_LOOKUP_DATA_PATH_KEY}="{SINGLE_WORD_LOOKUP_DATA_FILE_PATH}"\n'
+        )
         file.write(f'{CONTEXT_DATA_FILENAME_KEY}="{CONTEXT_DATA_FILENAME}"\n')
 
     print("Successfully created .env file with data paths.")
 
-    create_misspelled_sentences(SINGLE_WORD_LOOKUP_DATA_FILE_PATH, SENTENCES_DATA_FILE_PATH)
+    create_misspelled_sentences(
+        SINGLE_WORD_LOOKUP_DATA_FILE_PATH, SENTENCES_DATA_FILE_PATH
+    )
 
     print("Successfully crated file with misspelled sentences.")
 
