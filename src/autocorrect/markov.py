@@ -17,30 +17,18 @@ class MarkovModel:
                 next_word = words[i + self.n]
                 self.model[state][next_word] += 1
 
-    def predict(self, current_state):
-        next_word_counts = self.model[tuple(current_state)]
-        if not next_word_counts:
-            return None
-        total_count = sum(next_word_counts.values())
-        probabilities = {
-            word: count / total_count for word, count in next_word_counts.items()
-        }
-        return random.choices(
-            list(probabilities.keys()), weights=probabilities.values()
-        )[0]
-
-    def suggest_correction(self, context):
+    def suggest_correction(self, context: list[str]) -> list[str]:
         suggestions = {}
         for next_word in self.model[tuple(context)]:
             suggestions[next_word] = self.model[tuple(context)][next_word]
 
-        if suggestions:
-            sorted_suggestions = sorted(
-                suggestions.items(), key=lambda x: x[1], reverse=True
-            )
-            return [word for word, _ in sorted_suggestions]
-        else:
+        if not suggestions:
             return []
+
+        sorted_suggestions = sorted(
+            suggestions.items(), key=lambda x: x[1], reverse=True
+        )
+        return [word for word, _ in sorted_suggestions]
 
 
 class MarkovAutoCorrect(ContextAutoCorrect):
